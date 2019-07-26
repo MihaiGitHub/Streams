@@ -9,7 +9,7 @@ class GoogleAuth extends React.Component {
         window.gapi.load('client:auth2', () => {
             // Callback after this library has loaded
             window.gapi.client.init({
-                clientId: 'xxxxxxxxxxxxxx',
+                clientId: 'xxxxxxxxxxxxxxxxxxx',
                 scope: 'email'
             }).then(() => {
                 // Once library is initialized
@@ -26,15 +26,35 @@ class GoogleAuth extends React.Component {
         this.setState({ isSignedIn: this.auth.isSignedIn.get() });
     };
 
+    // Arrow function because it is a callback
+    onSignIn = () => {
+        this.auth.signIn();
+    };
+
+    // Arrow function because it is a callback
+    onSignOut = () => {
+        this.auth.signOut();
+    };
+
     renderAuthButton(){
         if(this.state.isSignedIn === null){
-            return <div>Don't know if signed in</div>;
+            return null;
         }
         else if (this.state.isSignedIn){
-            return <div>I am signed in</div>;
+            return (
+                <button onClick={this.onSignOut} className="ui red google button">
+                    <i className="google icon" />
+                    Sign Out
+                </button>
+            );
         }
         else {
-            return <div>Not signed in</div>;
+            return (
+                <button onClick={this.onSignIn} className="ui red google button">
+                    <i className="google icon" />
+                    Sign In with Google
+                </button>
+            );
         }
     }
 

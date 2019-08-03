@@ -11,7 +11,7 @@ class GoogleAuth extends React.Component {
         window.gapi.load('client:auth2', () => {
             // Callback after this library has loaded
             window.gapi.client.init({
-                clientId: 'xxxxxxxxxxxxxxxxxxx',
+                clientId: 'xxxx',
                 scope: 'email'
             }).then(() => {
                 // Once library is initialized

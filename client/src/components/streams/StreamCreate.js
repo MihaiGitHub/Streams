@@ -2,8 +2,11 @@ import React from 'react';
 import { Field, reduxForm } from 'redux-form';
 
 class StreamCreate extends React.Component {
-    renderInput(){
-        return <input />;
+    // Destructure input argument from properties coming from this.renderInput
+    // Properties sent from redux form <Field> element
+    renderInput({input}){
+        // Take all props from input argument and add them to the input element
+        return <input {...input} />;
     }
 
     render(){

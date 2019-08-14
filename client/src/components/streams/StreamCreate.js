@@ -4,9 +4,14 @@ import { Field, reduxForm } from 'redux-form';
 class StreamCreate extends React.Component {
     // Destructure input argument from properties coming from this.renderInput
     // Properties sent from redux form <Field> element
-    renderInput({input}){
+    renderInput({ input, label }){
         // Take all props from input argument and add them to the input element
-        return <input {...input} />;
+        return (
+            <div className="field">
+                <label>{label}</label>
+                <input {...input} />
+            </div>
+        );
     }
 
     render(){
@@ -14,9 +19,10 @@ class StreamCreate extends React.Component {
         console.log(this.props)
 
         return (
-            <form>
-                <Field name="title" component={this.renderInput} />
-                <Field name="description" component={this.renderInput} />
+            <form className="ui form">
+                {/* Field element will pass label prop through to renderInput */}
+                <Field name="title" component={this.renderInput} label="Enter title" />
+                <Field name="description" component={this.renderInput} label="Enter description" />
             </form>
         );
     }

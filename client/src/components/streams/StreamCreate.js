@@ -14,15 +14,20 @@ class StreamCreate extends React.Component {
         );
     }
 
+    onSubmit(formValues){
+        console.log(formValues);
+    }
+
     render(){
         // this.props will have a lot of props due to reduxForm
         console.log(this.props)
 
         return (
-            <form className="ui form">
+            <form onSubmit={this.props.handleSubmit(this.onSubmit)} className="ui form">
                 {/* Field element will pass label prop through to renderInput */}
                 <Field name="title" component={this.renderInput} label="Enter title" />
                 <Field name="description" component={this.renderInput} label="Enter description" />
+                <button className="ui button primary">Submit</button>
             </form>
         );
     }

@@ -1,5 +1,7 @@
 import React from 'react';
 import { Field, reduxForm } from 'redux-form';
+import { connect } from 'react-redux';
+import { createStream } from '../../actions';
 
 class StreamCreate extends React.Component {
     // Destructure error/touched from meta object
@@ -30,6 +32,8 @@ class StreamCreate extends React.Component {
 
     onSubmit(formValues){
         console.log(formValues);
+
+        this.props.createStream(formValues);
     }
 
     render(){
@@ -63,7 +67,9 @@ const validate = (formValues) => {
 };
 
 // This component will be passed a lot of new props now
-export default reduxForm({
+const formWrapped = reduxForm({
     form: 'streamCreate',
     validate // validate: validate
 })(StreamCreate);
+
+export default connect(null, { createStream })(formWrapped);

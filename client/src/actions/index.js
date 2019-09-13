@@ -12,7 +12,7 @@ import {
 export const signIn = userId => {
     return {
         type: SIGN_IN,
-        paylod: userId
+        payload: userId
     };
 };
 
@@ -22,8 +22,12 @@ export const signOut = () => {
     };
 };
 
-export const createStream = formValues => async dispatch => {
-    const response = await streams.post('/streams', formValues);
+// getState function is second argument for dispatch
+// allows us to reach into the redux store and pull out some piece of info
+export const createStream = formValues => async (dispatch, getState) => {
+    const { userId } = getState().auth;
+    // create new object with formValues and userId
+    const response = await streams.post('/streams', { ...formValues, userId } );
 
     dispatch({ type: CREATE_STREAM, payload: response.data });
 };

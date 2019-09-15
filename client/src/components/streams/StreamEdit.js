@@ -1,3 +1,4 @@
+import _ from 'lodash';
 import React from 'react';
 import { connect } from 'react-redux';
 import { fetchStream, editStream } from '../../actions';
@@ -9,7 +10,7 @@ class StreamEdit extends React.Component {
     }
 
     onSubmit = (formValues) => {
-        console.log(formValues)
+        this.props.editStream(this.props.match.params.id, formValues);
     };
     
     render(){
@@ -22,7 +23,7 @@ class StreamEdit extends React.Component {
                 <h3>Edit a Stream</h3>
                 {/* initialValues is a special property name with reduxForm which puts these values in the textbox */}
                 <StreamForm 
-                    initialValues={{ title: 'EDIT ME', description: 'CHANGE ME TOO' }} 
+                    initialValues={_.pick(this.props.stream, 'title', 'description')} 
                     onSubmit={this.onSubmit} />
             </div>
         );

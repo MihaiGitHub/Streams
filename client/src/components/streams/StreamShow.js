@@ -22,6 +22,11 @@ class StreamShow extends React.Component {
         this.buildPlayer();
     }
 
+    // Clean resources unused by component
+    componentWillUnmount(){
+        this.player.destroy();
+    }
+
     // Setup video player after appropriate stream has been fetched
     buildPlayer(){
         // But if a player is already built then no need
